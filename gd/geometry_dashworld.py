@@ -285,7 +285,7 @@ def mostrar_escena(mundo):
         x_inicio = 0
     if x_inicio + ancho_escena > ancho_mundo:
         x_inicio = ancho_mundo - ancho_escena
-    y_inicio = max(0, min(x1 - alto_escena // 2, alto_mundo - alto_escena))
+    y_inicio = max(0, min(x1 - alto_escena // 2, alto_mundo - alto_escena))  #solo para que no se salga del mundo
     return [fila[x_inicio:x_inicio + ancho_escena] for fila in mundo[y_inicio:y_inicio + alto_escena]]
 
 
@@ -294,7 +294,6 @@ def move_player(n):
     global y1
     global tria
     global init
-    global count
     n = n.lower()
     salida = n.split()
     for i in salida:
@@ -376,12 +375,12 @@ def move_player(n):
             sys.exit()
         else:
             return f"{n} is not a valid command, closing game"
-    if tria == False and n != "exit":
+    if not tria and n != "exit":
         print(move_player(input()))
     elif n == "exit":
         print("Closing game...")
         sys.exit()
-    elif tria == True:
+    elif tria:
         print("Would you like to continue? (yes or no)")
         n = input()
         n.lower()
